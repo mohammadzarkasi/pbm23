@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pbm233/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,20 +17,25 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Landing(),
+      home: RegisterPage(),
     );
   }
 }
 
-class Landing extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  State<Landing> createState() => _LandingState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LandingState extends State<Landing> {
-  bool cb1 = false;
+class _RegisterPageState extends State<RegisterPage> {
+  bool cbLakiLaki = false;
+  bool cbPerempuan = false;
   bool passwordVisible = true;
   var selected_date = '';
+  var nama_mhs = '';
+
+  var tf1Ctrl = TextEditingController();
+  var tf2Ctrl = TextEditingController();
 
   void tampilkanPopup() {
     showDialog(
@@ -46,7 +52,29 @@ class _LandingState extends State<Landing> {
               },
               child: Text('Batal'),
             ),
-            TextButton(onPressed: () {}, child: Text('Konfirm')),
+            TextButton(
+              onPressed: () async {
+                print('tf1: ${tf1Ctrl.text}');
+                print('tf2: ${tf2Ctrl.text}');
+
+                Navigator.of(context).pop();
+                var nilai = await Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext ctx2) {
+                  return HomePage(
+                    nama: tf1Ctrl.text,
+                    angkatan: tf2Ctrl.text,
+                  );
+                }));
+
+                if (nilai != null) {
+                  // proses data yg dikembalikan dari halaman homepage
+                  print('nilai: $nilai');
+                } else {
+                  print('tidak ada data yang dikembalikan');
+                }
+              },
+              child: Text('Konfirm'),
+            ),
           ],
         );
       },
@@ -75,86 +103,94 @@ class _LandingState extends State<Landing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pbm23'),
+        title: Text('Register'),
       ),
-      body: Column(
-        children: [
-          Text('Textfield 1'),
-          TextField(
-            obscureText: passwordVisible,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            SizedBox(height: 30),
+            Container(
+              width: double.infinity,
+              child: Text('Textfield 1'),
+            ),
+            TextField(
+              controller: tf1Ctrl,
+              obscureText: passwordVisible,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.remove_red_eye),
+                  onPressed: () {
+                    print('icon pasword clicked');
+                    setState(() {
+                      passwordVisible = !passwordVisible;
+                    });
+                  },
+                ),
               ),
-              suffixIcon: IconButton(
-                icon: Icon(Icons.remove_red_eye),
-                onPressed: () {
-                  print('icon pasword clicked');
-                  setState(() {
-                    passwordVisible = !passwordVisible;
-                  });
-                },
+              // onChanged: (String v) {
+              //   print('f1: $v');
+              //   nama_mhs = v;
+              // },
+            ),
+            Text('tf 2'),
+            TextField(
+              controller: tf2Ctrl,
+              decoration: InputDecoration(
+                hintText: 'Angkatan',
               ),
             ),
-            onChanged: (String v) {
-              print('f1: $v');
-            },
-          ),
-          Text('tf 2'),
-          TextField(
-            decoration: InputDecoration(
-              hintText: 'Angkatan',
+            SizedBox(height: 30),
+            Text(
+              'checkbox 1',
+              style: TextStyle(fontSize: 24),
             ),
-          ),
-          SizedBox(height: 30),
-          Text(
-            'checkbox 1',
-            style: TextStyle(fontSize: 24),
-          ),
-          Row(
-            children: [
-              Checkbox(
-                value: cb1,
-                onChanged: (bool? v) {
-                  print('checkbox 1: $v');
-
-                  setState(() {
-                    cb1 = v ?? false;
-                  });
-                },
-              ),
-              Text('Laki-laki'),
-            ],
-          ),
-          Row(
-            children: [
-              Checkbox(
-                value: cb1,
-                onChanged: (bool? v) {
-                  print('checkbox 1: $v');
-
-                  setState(() {
-                    cb1 = v ?? false;
-                  });
-                },
-              ),
-              Text('Perempuan'),
-            ],
-          ),
-          Row(
-            children: [
-              TextButton(
-                onPressed: ambilTanggal,
-                child: Text('Pilih Tanggal'),
-              ),
-              Text(selected_date),
-            ],
-          ),
-          ElevatedButton(
-            onPressed: tampilkanPopup,
-            child: Text('Konfirmasi!'),
-          ),
-        ],
+            Row(
+              children: [
+                Checkbox(
+                  value: cbLakiLaki,
+                  onChanged: (bool? v) {
+                    print('checkbox 1: $v');
+                    setState(() {
+                      cbLakiLaki = v ?? false;
+                    });
+                  },
+                ),
+                Text('Laki-laki'),
+              ],
+            ),
+            Row(
+              children: [
+                Checkbox(
+                  value: cbPerempuan,
+                  onChanged: (bool? v) {
+                    print('checkbox 1: $v');
+                    setState(() {
+                      cbPerempuan = v ?? false;
+                    });
+                  },
+                ),
+                Text('Perempuan'),
+              ],
+            ),
+            Row(
+              children: [
+                TextButton(
+                  onPressed: ambilTanggal,
+                  child: Text('Pilih Tanggal'),
+                ),
+                Text(selected_date),
+              ],
+            ),
+            ElevatedButton(
+              onPressed: tampilkanPopup,
+              child: Text('Konfirmasi!'),
+            ),
+          ],
+        ),
       ),
     );
   }
