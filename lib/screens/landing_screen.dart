@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:pbm233/screens/daftar_materi_screen.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
@@ -46,7 +47,43 @@ class _LandingScreenState extends State<LandingScreen> {
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return DaftarMateriScreen();
+                    },
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      const begin = Offset(1.0, 0.0);
+                      const end = Offset.zero;
+                      const curve = Curves.ease;
+
+                      var tween = Tween(begin: begin, end: end)
+                          .chain(CurveTween(curve: curve));
+
+                      return SlideTransition(
+                        position: animation.drive(tween),
+                        child: child,
+                      );
+                    },
+                  ));
+
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (ctx) {
+                  //       return DaftarMateriScreen();
+                  //     },
+                  //     settings: RouteSettings(),
+                  //   ),
+                  // );
+
+                  // Navigator.of(context).pushAndRemoveUntil(
+                  //   MaterialPageRoute(builder: (ctx) {
+                  //     return DaftarMateriScreen();
+                  //   }),
+                  //   (route) => false,
+                  // );
+                },
                 child: Text('Lanjut'),
               ),
             ),
