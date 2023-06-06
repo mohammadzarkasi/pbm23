@@ -10,6 +10,17 @@ class DaftarMateriScreen extends StatefulWidget {
 }
 
 class _DaftarMateriScreenState extends State<DaftarMateriScreen> {
+  var deskripsi = <String>[
+    'Daftar software yang harus diinstal: Java, Android SDK, Flutter SDK, Git, plugin flutter, android simulator.',
+    'Pengenalan bahasa pemrograman Dart yang digunakan oleh flutter: konsep variable, function, fungsi main, class.',
+    'Pengenalan struktur project flutter: file yaml, folder lib, folder android, widget MaterialApp (root)',
+    'Pengenalan widget-widget penting dan mendasar untuk menyusun tampilan aplikasi mobile menggunakan flutter.',
+    'Pengenalan widget-widget penting untuk menata tata-letak komponen UI di flutter.',
+    'Pengenalan jenis widget statefull: kegunaan, life-cycle, proses update UI.',
+    'Pengenalan teknik pemanfaatan GPS dan Plugin Maps untuk dapat menampilkan peta dan lokasi di aplikasi mobile.',
+    'Pengenalan teknik pemanfaatan kamera pada perangkat mobile untuk dapat mengambil gambar melalui aplikasi mobile.',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,20 +32,50 @@ class _DaftarMateriScreenState extends State<DaftarMateriScreen> {
         crossAxisSpacing: 5,
         children: [
           buildGridItem(
-              color: Colors.green, text: 'Kontrak Kuliah dan Instalasi SDK'),
-          buildGridItem(color: Colors.yellow, text: 'Bahasa Pemrograman Dart'),
-          buildGridItem(color: Colors.amber, text: 'Pengenalan Flutter'),
-          buildGridItem(color: Colors.blue, text: 'Widget Dasar'),
-          buildGridItem(color: Colors.brown, text: 'Menata Layout'),
-          buildGridItem(color: Colors.cyan, text: 'Stateful Widget'),
-          buildGridItem(color: Colors.orange, text: 'Peta dan GPS'),
-          buildGridItem(text: 'Kamera'),
+            color: Colors.green,
+            title: 'Kontrak Kuliah dan Instalasi SDK',
+            content: deskripsi[0],
+          ),
+          buildGridItem(
+            color: Colors.yellow,
+            title: 'Bahasa Pemrograman Dart',
+            content: deskripsi[1],
+          ),
+          buildGridItem(
+            color: Colors.amber,
+            title: 'Pengenalan Flutter',
+            content: deskripsi[2],
+          ),
+          buildGridItem(
+            color: Colors.blue,
+            title: 'Widget Dasar',
+            content: deskripsi[3],
+          ),
+          buildGridItem(
+            color: Colors.brown,
+            title: 'Menata Layout',
+            content: deskripsi[4],
+          ),
+          buildGridItem(
+            color: Colors.cyan,
+            title: 'Stateful Widget',
+            content: deskripsi[5],
+          ),
+          buildGridItem(
+            color: Colors.orange,
+            title: 'Peta dan GPS',
+            content: deskripsi[6],
+          ),
+          buildGridItem(
+            title: 'Kamera',
+            content: deskripsi[7],
+          ),
         ],
       ),
     );
   }
 
-  Widget buildGridItem({Color? color, String? text}) {
+  Widget buildGridItem({Color? color, String? title, String? content}) {
     return Container(
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -42,7 +83,7 @@ class _DaftarMateriScreenState extends State<DaftarMateriScreen> {
       ),
       alignment: Alignment.center,
       child: Text(
-        text ?? 'Materi x',
+        title ?? 'Materi x',
         // style: TextStyle(),
         textAlign: TextAlign.center,
       ),
