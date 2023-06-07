@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import '../main.dart';
+import 'detail_materi_screen.dart';
 
 class DaftarMateriScreen extends StatefulWidget {
   const DaftarMateriScreen({super.key});
@@ -76,16 +78,33 @@ class _DaftarMateriScreenState extends State<DaftarMateriScreen> {
   }
 
   Widget buildGridItem({Color? color, String? title, String? content}) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: color ?? Colors.red,
-      ),
-      alignment: Alignment.center,
-      child: Text(
-        title ?? 'Materi x',
-        // style: TextStyle(),
-        textAlign: TextAlign.center,
+    return GestureDetector(
+      onTap: () {
+        navigateTo(
+            ctx: context,
+            page: DetailMateriScreen(
+              title: title ?? 'Materi x',
+              content: content ?? '',
+            ));
+
+        // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+        //   return DetailMateriScreen(
+        //     title: title ?? 'Materi x',
+        //     content: content ?? '',
+        //   );
+        // }));
+      },
+      child: Container(
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: color ?? Colors.red,
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          title ?? 'Materi x',
+          // style: TextStyle(),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
