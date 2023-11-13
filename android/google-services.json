@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "645101778491",
+    "project_id": "pbm-2023",
+    "storage_bucket": "pbm-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645101778491:android:00730ddc1b0dbc3c26ce1e",
+        "android_client_info": {
+          "package_name": "unej.ilkom.pbm23"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6XXWZtDy9xRzyWnmrqpFVP0hPF6XCumE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
